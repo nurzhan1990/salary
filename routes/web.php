@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [App\Http\Controllers\SalaryController::class, 'index']);
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Auth::routes();
 

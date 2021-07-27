@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SalaryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Route::get('/calculate', [App\Http\Controllers\SalaryController::class, 'calculate']);
-//Route::post('/calculate', [App\Http\Controllers\SalaryController::class, 'calculate']);
+Route::get('/calculate', [App\Http\Controllers\SalaryController::class, 'getCalculate']);
+Route::post('/calculate', [App\Http\Controllers\SalaryController::class, 'postCalculate']);
 
-Route::resource('/calculate', SalaryController::class)->only([
-    'index', 'store'
-]);

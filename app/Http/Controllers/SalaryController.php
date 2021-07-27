@@ -20,17 +20,22 @@ class SalaryController extends Controller
         'disabled_person_category' => ['required_if:disabled_person,===,true','numeric','min:1','max:3'],
     ];
 
-    public function index(request $request){
+    public function index(){
+        view('welcome');
+    }
+
+    public function getCalculate(request $request){
 
         $val = Validator::make($request->all(), $this->rules);
         if($val->fails()) return $val->messages();
 
         $res = self::calculation($request);
 
-        return $res;
+//        return $res;
+        return response()->json($res);
     }
 
-    public function store(request $request){
+    public function postCalculate(request $request){
         $val = Validator::make($request->all(), $this->rules);
         if($val->fails()) return $val->messages();
 
@@ -49,7 +54,7 @@ class SalaryController extends Controller
         $sal->salary_sum = $res->salary_sum;
         $sal->save();
 
-        return $sal;
+        return response()->json($sal);
     }
 
     public function calculation($request){
